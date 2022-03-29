@@ -1,0 +1,71 @@
+@use "@/styles/abstracts" as *;
+
+$box_size: 5vh;
+
+.box {
+  height: $box_size;
+  width: $box_size;
+
+  @include fcc;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.color_box,
+.size_box {
+  &:hover {
+    cursor: pointer;
+    outline: 2px solid black;
+  }
+}
+
+.color_box {
+  &:hover {
+    border: 2px solid white;
+  }
+}
+
+.size_box {
+  border: 1px solid black;
+}
+
+.selected {
+  outline: 2px solid black;
+  border: 2px solid white;
+}
+
+.unavailable {
+  color: grey !important;
+  text-decoration: line-through;
+
+  &:hover {
+    outline: none;
+    cursor: default;
+  }
+}
+
+.qty_box {
+  border: 1px solid black;
+  height: $box_size;
+  width: $box_size * 1.5;
+  @include fcc;
+}
+
+.qty_button {
+  background-color: black;
+  color: white;
+}
+
+.selectable {
+  &:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
+  }
+}
