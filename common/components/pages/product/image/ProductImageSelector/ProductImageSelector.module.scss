@@ -1,0 +1,10 @@
+.image,
+.arrow {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.arrow {
+  font-size: 2rem;
+}
