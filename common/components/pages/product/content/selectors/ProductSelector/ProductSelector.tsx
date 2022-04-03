@@ -30,7 +30,6 @@ const ProductSelector = ({
   const current_type = types.find((type: Type) => type.color.name === color);
 
   useEffect(() => {
-    console.log(size, color, quantity);
     setIsFormValid(color && size && quantity >= 1 ? true : false);
   }, [color, size, quantity]);
 
@@ -38,9 +37,15 @@ const ProductSelector = ({
     e.preventDefault();
     product_dispatch({ type: "submit" });
 
+    const product_title = "Manteau d'hiver isolé - Homme"; //à mettre dans le state et l'intialiser au chargement de la page
+
+    const success_message = `Vous avez commandé ${
+      product_state.quantity === 1 ? "un" : product_state.quantity
+    } ${product_title} ${product_state.color} en taille ${product_state.size}`;
+
     if (isFormValid) {
       try {
-        console.log(product_state);
+        console.log(success_message);
         product_dispatch({ type: "success" });
       } catch (error) {
         product_dispatch({ type: "error", payload: error });

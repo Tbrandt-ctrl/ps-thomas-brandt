@@ -1,7 +1,10 @@
-import type { ProductReducerPayload, State } from "@/types/pages/product";
+import type {
+  ProductReducerPayload,
+  ProductState,
+} from "@/types/pages/product";
 
 export const productReducer = (
-  state: State,
+  state: ProductState,
   { type, payload }: ProductReducerPayload
 ) => {
   const { image_number: number, quantity } = state;
@@ -85,10 +88,10 @@ export const productReducer = (
   }
 };
 
-export const initialState: State = {
+export const initialState: ProductState = {
   color: "khaki",
   image_number: 0,
-  size: null,
+  size: "",
   quantity: 1,
   submitted: false,
   loading: false,

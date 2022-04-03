@@ -22,7 +22,9 @@ const ProductQuantitySelector = ({
   const [inventory, setInventory] = useState(0);
 
   useEffect(() => {
-    setAvailable(product_state.size && product_state.size !== 0 ? true : false);
+    setAvailable(
+      product_state.size && product_state.size !== "" ? true : false
+    );
 
     const current_stock = current_type?.stock.find(
       (stock) => stock.size === product_state.size
@@ -74,7 +76,7 @@ const ProductQuantitySelector = ({
         </>
       ) : (
         <>
-          <span>Veuillez selectionner un produit disponible</span>
+          <span>Veuillez selectionner une taille disponible</span>
         </>
       )}
     </div>

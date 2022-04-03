@@ -6,9 +6,7 @@ import data from "./data";
 
 import ProductContent from "@/components/pages/product/content/ProductContent";
 
-export default function Product(product: ProductData) {
-  console.log(product);
-
+export default function Product({ product }: { product: ProductData }) {
   return (
     <main className="py-5">
       <ProductContent product={product} />

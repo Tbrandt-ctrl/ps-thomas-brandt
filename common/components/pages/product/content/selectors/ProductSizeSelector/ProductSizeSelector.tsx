@@ -47,7 +47,7 @@ const SizeSelectorBox = ({
   product_dispatch,
 }: {
   quantity: number;
-  size: number;
+  size: string;
   product_state: ProductState;
   product_dispatch: Dispatch<ProductReducerPayload>;
 }) => {

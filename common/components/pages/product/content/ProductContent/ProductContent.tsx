@@ -28,7 +28,9 @@ const ProductContent = ({ product }: { product: ProductData }) => {
     <section>
       <BootStrapRow>
         {types && <ProductImage {...productProps} types={types} />}
-        <ProductInfo productProps={productProps} product={product} />
+        {product && (
+          <ProductInfo productProps={productProps} product={product} />
+        )}
       </BootStrapRow>
     </section>
   );

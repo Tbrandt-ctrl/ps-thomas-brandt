@@ -42,11 +42,6 @@ $box_size: 5vh;
 .unavailable {
   color: grey !important;
   text-decoration: line-through;
-
-  &:hover {
-    outline: none;
-    cursor: default;
-  }
 }
 
 .qty_box {
