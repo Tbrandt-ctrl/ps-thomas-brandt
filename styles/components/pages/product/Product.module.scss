@@ -47,16 +47,17 @@ $box_size: 5vh;
   border: 1px solid black;
   height: $box_size;
   width: $box_size * 1.5;
+  user-select: none;
   @include fcc;
 }
 
 .qty_button {
-  background-color: red;
+  background-color: grey;
   color: white;
 }
 
 .selectable {
-  background-color: blue;
+  background-color: black;
   &:hover {
     background-color: white;
     color: black;

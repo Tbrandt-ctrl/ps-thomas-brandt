@@ -1,15 +1,13 @@
 import ProductSelector from "@/components/pages/product/content/selectors/ProductSelector";
 
-import {
-  ProductData,
-  SelectionState,
-  SelectionReducerPayload,
-} from "@/types/pages/product";
+import { ProductData, SelectionState } from "@/types/pages/product";
+
+import { ReducerPayload } from "@/types/reducer";
 import { Dispatch } from "react";
 
 interface SelectionProps {
   selection_state: SelectionState;
-  selection_dispatch: Dispatch<SelectionReducerPayload>;
+  selection_dispatch: Dispatch<ReducerPayload>;
 }
 
 const ProductInfo = ({

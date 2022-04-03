@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import type {
-  SelectionReducerPayload,
+  ReducerPayload,
   SelectionState,
   Type,
 } from "@/types/pages/product";
@@ -18,7 +18,7 @@ const ProductImage = ({
   types,
 }: {
   selection_state: SelectionState;
-  selection_dispatch: Dispatch<SelectionReducerPayload>;
+  selection_dispatch: Dispatch<ReducerPayload>;
   types: Type[];
 }) => {
   const images = types?.find(

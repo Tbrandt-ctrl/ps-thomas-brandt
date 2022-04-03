@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 
-import { SelectionState, SelectionReducerPayload } from "@/types/pages/product";
+import { SelectionState } from "@/types/pages/product";
+import { ReducerPayload } from "@/types/reducer";
 import { Dispatch } from "react";
 import { Type } from "@/types/pages/product";
 import { SyntheticEvent } from "react";
@@ -11,7 +12,7 @@ import ProductQuantitySelector from "@/components/pages/product/content/selector
 
 interface SelectionProps {
   selection_state: SelectionState;
-  selection_dispatch: Dispatch<SelectionReducerPayload>;
+  selection_dispatch: Dispatch<ReducerPayload>;
 }
 
 const ProductSelector = ({
@@ -24,8 +25,7 @@ const ProductSelector = ({
   const [isFormValid, setIsFormValid] = useState(false);
 
   const { selection_state, selection_dispatch } = SelectionProps;
-
-  const { color, size, quantity, success } = selection_state;
+  const { color, size, quantity, success, available } = selection_state;
 
   const current_type = types.find((type: Type) => type.color.name === color);
 

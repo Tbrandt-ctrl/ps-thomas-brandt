@@ -1,11 +1,7 @@
 import { useState, useEffect, Dispatch } from "react";
 
 import ProductStyles from "@/styles/components/pages/product/Product.module.scss";
-import {
-  SelectionReducerPayload,
-  SelectionState,
-  Type,
-} from "@/types/pages/product";
+import { ReducerPayload, SelectionState, Type } from "@/types/pages/product";
 
 const ProductSizeSelector = ({
   selection_state,
@@ -13,7 +9,7 @@ const ProductSizeSelector = ({
   current_type,
 }: {
   selection_state: SelectionState;
-  selection_dispatch: Dispatch<SelectionReducerPayload>;
+  selection_dispatch: Dispatch<ReducerPayload>;
   current_type: Type;
 }) => {
   return (
@@ -49,7 +45,7 @@ const SizeSelectorBox = ({
   quantity: number;
   size: string;
   selection_state: SelectionState;
-  selection_dispatch: Dispatch<SelectionReducerPayload>;
+  selection_dispatch: Dispatch<ReducerPayload>;
 }) => {
   const [selected, setSelected] = useState(false);
   const [available, setAvailable] = useState(false);

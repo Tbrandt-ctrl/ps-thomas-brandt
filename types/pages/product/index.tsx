@@ -41,6 +41,8 @@ interface ProductData {
 }
 
 interface SelectionState {
+  title: string;
+  price: number;
   color: string;
   image_number: number;
   size: string;
@@ -52,16 +54,4 @@ interface SelectionState {
   error: String;
 }
 
-interface SelectionReducerPayload {
-  type: string;
-  payload?: any;
-}
-
-export type {
-  ProductData,
-  SelectionState,
-  Type,
-  SelectionReducerPayload,
-  Image,
-  Stock,
-};
+export type { ProductData, SelectionState, Type, Image, Stock };

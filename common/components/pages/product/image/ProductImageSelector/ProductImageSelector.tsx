@@ -1,4 +1,4 @@
-import { SelectionReducerPayload, Image } from "@/types/pages/product";
+import { ReducerPayload, Image } from "@/types/pages/product";
 import { Dispatch } from "react";
 
 import styles from "./ProductImageSelector.module.scss";
@@ -8,7 +8,7 @@ const ProductImageSelector = ({
   selection_dispatch,
 }: {
   images: Image[];
-  selection_dispatch: Dispatch<SelectionReducerPayload>;
+  selection_dispatch: Dispatch<ReducerPayload>;
 }) => {
   return (
     <div className="h-100 d-flex flex-column gap-2 justify-content-center align-items-center p-2">

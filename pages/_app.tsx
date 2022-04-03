@@ -6,11 +6,15 @@ import Layout from "@/common/Layout";
 
 import type { AppProps } from "next/app";
 
+import { BasketWrapper } from "context/basketContext";
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <BasketWrapper>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </BasketWrapper>
   );
 }
 

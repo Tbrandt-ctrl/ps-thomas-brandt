@@ -1,9 +1,5 @@
 import ProductStyles from "@/styles/components/pages/product/Product.module.scss";
-import {
-  SelectionState,
-  SelectionReducerPayload,
-  Type,
-} from "@/types/pages/product";
+import { SelectionState, ReducerPayload, Type } from "@/types/pages/product";
 import { Dispatch } from "react";
 
 const ProductColorSelector = ({
@@ -12,7 +8,7 @@ const ProductColorSelector = ({
   types,
 }: {
   selection_state: SelectionState;
-  selection_dispatch: Dispatch<SelectionReducerPayload>;
+  selection_dispatch: Dispatch<ReducerPayload>;
   types: Type[];
 }) => {
   return (

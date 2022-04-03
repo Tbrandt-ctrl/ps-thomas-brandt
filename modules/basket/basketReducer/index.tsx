@@ -1,2 +1,1 @@
-
-export {default} "./basketReducer"
+export { basketReducer, initialState } from "./basketReducer";

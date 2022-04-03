@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 
-import {
-  SelectionReducerPayload,
-  SelectionState,
-  Type,
-  Stock,
-} from "@/types/pages/product";
+import { SelectionState, Type, Stock } from "@/types/pages/product";
+import { ReducerPayload } from "@/types/reducer";
 import { Dispatch } from "react";
 
 import ProductStyles from "@/styles/components/pages/product/Product.module.scss";
@@ -16,7 +12,7 @@ const ProductQuantitySelector = ({
   current_type,
 }: {
   selection_state: SelectionState;
-  selection_dispatch: Dispatch<SelectionReducerPayload>;
+  selection_dispatch: Dispatch<ReducerPayload>;
   current_type: Type;
 }) => {
   //If it is possible to choose a quantity
@@ -33,7 +29,6 @@ const ProductQuantitySelector = ({
           (stock) => stock.size === selection_state.size
         ) || inventory
       );
-    console.log(inventory);
   }, [selection_state]);
 
   //update the availability of the selection based on the size and the quantity of the current inventory
@@ -45,54 +40,54 @@ const ProductQuantitySelector = ({
   }, [inventory]);
 
   useEffect(() => {
-    selection_dispatch({ type: "reset_quantity", payload: null });
-  }, [selection_state.color, selection_state.size]);
+    selection_dispatch({
+      type: "reset_quantity",
+      payload: inventory.quantity > 1 ? 1 : inventory.quantity,
+    });
+  }, [selection_state.color, selection_state.size, inventory]);
 
   return (
     <div>
-      {available ? (
-        <>
-          <h6>Quantité</h6>
-          <div className="d-flex flex-row justify-content-start align-items-center gap-2">
-            <div
-              className={`${ProductStyles.box} ${ProductStyles.qty_button} ${
-                selection_state.quantity > 1 && ProductStyles.selectable
-              }`}
-              onClick={() =>
-                available &&
-                selection_dispatch({
-                  type: "update_quantity",
-                  payload: { amount: -1, inventory: inventory.quantity },
-                })
-              }
-            >
-              <span>-</span>
-            </div>
-            <div className={` ${ProductStyles.qty_box}`}>
-              <span>{selection_state.quantity}</span>
-            </div>
-            <div
-              onClick={() =>
-                available &&
-                selection_dispatch({
-                  type: "update_quantity",
-                  payload: { amount: 1, inventory: inventory.quantity },
-                })
-              }
-              className={`${ProductStyles.box} ${ProductStyles.qty_button} ${
-                selection_state.quantity !== inventory.quantity &&
-                ProductStyles.selectable
-              }`}
-            >
-              <span>+</span>
-            </div>
+      <>
+        <h6>Quantité</h6>
+        <div className="d-flex flex-row justify-content-start align-items-center gap-2">
+          <div
+            className={`${ProductStyles.box} ${ProductStyles.qty_button} ${
+              available &&
+              selection_state.quantity > 1 &&
+              ProductStyles.selectable
+            }`}
+            onClick={() =>
+              available &&
+              selection_dispatch({
+                type: "update_quantity",
+                payload: { amount: -1, inventory: inventory.quantity },
+              })
+            }
+          >
+            <span>-</span>
           </div>
-        </>
-      ) : (
-        <>
-          <span>Veuillez selectionner une taille disponible</span>
-        </>
-      )}
+          <div className={` ${ProductStyles.qty_box}`}>
+            <span>{selection_state.quantity}</span>
+          </div>
+          <div
+            onClick={() =>
+              available &&
+              selection_dispatch({
+                type: "update_quantity",
+                payload: { amount: 1, inventory: inventory.quantity },
+              })
+            }
+            className={`${ProductStyles.box} ${ProductStyles.qty_button} ${
+              available &&
+              selection_state.quantity !== inventory.quantity &&
+              ProductStyles.selectable
+            }`}
+          >
+            <span>+</span>
+          </div>
+        </div>
+      </>
     </div>
   );
 };

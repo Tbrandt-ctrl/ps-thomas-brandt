@@ -1,15 +1,17 @@
-import type {
-  SelectionReducerPayload,
-  SelectionState,
-} from "@/types/pages/product";
+import type { SelectionState } from "@/types/pages/product";
+import type { ReducerPayload } from "@/types/reducer";
 
 export const selectionReducer = (
   state: SelectionState,
-  { type, payload }: SelectionReducerPayload
+  { type, payload }: ReducerPayload
 ) => {
   const { image_number: number, quantity } = state;
 
   switch (type) {
+    case "init": {
+      return { ...state, title: payload.title, price: payload.price };
+    }
+
     case "next_image": {
       let updatedvalue: number;
 
@@ -68,7 +70,7 @@ export const selectionReducer = (
     }
 
     case "reset_quantity": {
-      return { ...state, quantity: 1 };
+      return { ...state, quantity: payload };
     }
 
     case "submit": {
@@ -93,10 +95,12 @@ export const selectionReducer = (
 };
 
 export const initialState: SelectionState = {
+  title: "",
+  price: 0,
   color: "khaki",
   image_number: 0,
   size: "",
-  quantity: 1,
+  quantity: 0,
   available: false,
   submitted: false,
   loading: false,

@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 import { ProductData } from "@/types/pages/product";
 
@@ -23,6 +23,13 @@ const ProductContent = ({ product }: { product: ProductData }) => {
     selection_state,
     selection_dispatch,
   };
+
+  useEffect(() => {
+    selection_dispatch({
+      type: "init",
+      payload: { title: product.title, price: product.price },
+    });
+  }, [product]);
 
   return (
     <section>
