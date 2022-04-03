@@ -1,41 +1,52 @@
 import { useState, useEffect } from "react";
 
 import {
-  ProductReducerPayload,
-  ProductState,
+  SelectionReducerPayload,
+  SelectionState,
   Type,
+  Stock,
 } from "@/types/pages/product";
 import { Dispatch } from "react";
 
 import ProductStyles from "@/styles/components/pages/product/Product.module.scss";
 
 const ProductQuantitySelector = ({
-  product_state,
-  product_dispatch,
+  selection_state,
+  selection_dispatch,
   current_type,
 }: {
-  product_state: ProductState;
-  product_dispatch: Dispatch<ProductReducerPayload>;
+  selection_state: SelectionState;
+  selection_dispatch: Dispatch<SelectionReducerPayload>;
   current_type: Type;
 }) => {
-  const [available, setAvailable] = useState(false);
-  const [inventory, setInventory] = useState(0);
+  //If it is possible to choose a quantity
+  const { available } = selection_state;
+
+  //The available quantity and size for the current stock selected
+  const [inventory, setInventory] = useState({ size: "", quantity: 0 });
+
+  //get the current inventory selected (with the size and the quantity)
+  useEffect(() => {
+    current_type &&
+      setInventory(
+        current_type.stock.find(
+          (stock) => stock.size === selection_state.size
+        ) || inventory
+      );
+    console.log(inventory);
+  }, [selection_state]);
+
+  //update the availability of the selection based on the size and the quantity of the current inventory
+  useEffect(() => {
+    selection_dispatch({
+      type: "update_available",
+      payload: inventory.size !== "" && inventory.quantity > 0,
+    });
+  }, [inventory]);
 
   useEffect(() => {
-    setAvailable(
-      product_state.size && product_state.size !== "" ? true : false
-    );
-
-    const current_stock = current_type?.stock.find(
-      (stock) => stock.size === product_state.size
-    );
-
-    current_stock?.quantity && setInventory(current_stock.quantity);
-  }, [product_state]);
-
-  useEffect(() => {
-    product_dispatch({ type: "reset_quantity", payload: null });
-  }, [product_state.color, product_state.size]);
+    selection_dispatch({ type: "reset_quantity", payload: null });
+  }, [selection_state.color, selection_state.size]);
 
   return (
     <div>
@@ -45,29 +56,32 @@ const ProductQuantitySelector = ({
           <div className="d-flex flex-row justify-content-start align-items-center gap-2">
             <div
               className={`${ProductStyles.box} ${ProductStyles.qty_button} ${
-                product_state.quantity > 1 && ProductStyles.selectable
+                selection_state.quantity > 1 && ProductStyles.selectable
               }`}
               onClick={() =>
-                product_dispatch({
+                available &&
+                selection_dispatch({
                   type: "update_quantity",
-                  payload: { amount: -1, inventory },
+                  payload: { amount: -1, inventory: inventory.quantity },
                 })
               }
             >
               <span>-</span>
             </div>
             <div className={` ${ProductStyles.qty_box}`}>
-              <span>{product_state.quantity}</span>
+              <span>{selection_state.quantity}</span>
             </div>
             <div
               onClick={() =>
-                product_dispatch({
+                available &&
+                selection_dispatch({
                   type: "update_quantity",
-                  payload: { amount: 1, inventory },
+                  payload: { amount: 1, inventory: inventory.quantity },
                 })
               }
               className={`${ProductStyles.box} ${ProductStyles.qty_button} ${
-                product_state.quantity !== inventory && ProductStyles.selectable
+                selection_state.quantity !== inventory.quantity &&
+                ProductStyles.selectable
               }`}
             >
               <span>+</span>

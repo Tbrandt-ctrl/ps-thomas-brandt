@@ -2,22 +2,22 @@ import ProductSelector from "@/components/pages/product/content/selectors/Produc
 
 import {
   ProductData,
-  ProductState,
-  ProductReducerPayload,
+  SelectionState,
+  SelectionReducerPayload,
 } from "@/types/pages/product";
 import { Dispatch } from "react";
 
-interface ProductProps {
-  product_state: ProductState;
-  product_dispatch: Dispatch<ProductReducerPayload>;
+interface SelectionProps {
+  selection_state: SelectionState;
+  selection_dispatch: Dispatch<SelectionReducerPayload>;
 }
 
 const ProductInfo = ({
   product,
-  productProps,
+  SelectionProps,
 }: {
   product: ProductData;
-  productProps: ProductProps;
+  SelectionProps: SelectionProps;
 }) => {
   const { types } = product;
   return (
@@ -34,7 +34,7 @@ const ProductInfo = ({
       </div>
       <hr className="w-100" />
       <small>Code de référence: {product.ref}</small>
-      <ProductSelector productProps={productProps} types={types} />
+      <ProductSelector SelectionProps={SelectionProps} types={types} />
     </div>
   );
 };

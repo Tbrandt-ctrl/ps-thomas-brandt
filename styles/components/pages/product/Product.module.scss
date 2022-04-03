@@ -7,7 +7,6 @@ $box_size: 5vh;
   width: $box_size;
 
   @include fcc;
-
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -52,11 +51,12 @@ $box_size: 5vh;
 }
 
 .qty_button {
-  background-color: black;
+  background-color: red;
   color: white;
 }
 
 .selectable {
+  background-color: blue;
   &:hover {
     background-color: white;
     color: black;

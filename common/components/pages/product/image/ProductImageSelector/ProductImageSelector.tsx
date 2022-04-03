@@ -1,14 +1,14 @@
-import { ProductReducerPayload, Image } from "@/types/pages/product";
+import { SelectionReducerPayload, Image } from "@/types/pages/product";
 import { Dispatch } from "react";
 
 import styles from "./ProductImageSelector.module.scss";
 
 const ProductImageSelector = ({
   images,
-  product_dispatch,
+  selection_dispatch,
 }: {
   images: Image[];
-  product_dispatch: Dispatch<ProductReducerPayload>;
+  selection_dispatch: Dispatch<SelectionReducerPayload>;
 }) => {
   return (
     <div className="h-100 d-flex flex-column gap-2 justify-content-center align-items-center p-2">
@@ -16,7 +16,7 @@ const ProductImageSelector = ({
         <i
           className={`bi bi-arrow-up-short ${styles.arrow}`}
           onClick={() => {
-            product_dispatch({
+            selection_dispatch({
               type: "previous_image",
               payload: images.length,
             });
@@ -25,7 +25,7 @@ const ProductImageSelector = ({
         <i
           className={`bi bi-arrow-down-short ${styles.arrow}`}
           onClick={() =>
-            product_dispatch({ type: "next_image", payload: images.length })
+            selection_dispatch({ type: "next_image", payload: images.length })
           }
         ></i>
       </div>
@@ -34,7 +34,7 @@ const ProductImageSelector = ({
           <div key={index} className={`${styles.image}`}>
             <img
               onClick={() =>
-                product_dispatch({ type: "set_image", payload: index })
+                selection_dispatch({ type: "set_image", payload: index })
               }
               className="img-fluid"
               src={image.link}

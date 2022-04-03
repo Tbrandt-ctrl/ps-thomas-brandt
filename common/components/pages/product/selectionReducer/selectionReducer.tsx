@@ -1,11 +1,11 @@
 import type {
-  ProductReducerPayload,
-  ProductState,
+  SelectionReducerPayload,
+  SelectionState,
 } from "@/types/pages/product";
 
-export const productReducer = (
-  state: ProductState,
-  { type, payload }: ProductReducerPayload
+export const selectionReducer = (
+  state: SelectionState,
+  { type, payload }: SelectionReducerPayload
 ) => {
   const { image_number: number, quantity } = state;
 
@@ -63,6 +63,10 @@ export const productReducer = (
       return { ...state, quantity: payload };
     }
 
+    case "update_available": {
+      return { ...state, available: payload };
+    }
+
     case "reset_quantity": {
       return { ...state, quantity: 1 };
     }
@@ -88,11 +92,12 @@ export const productReducer = (
   }
 };
 
-export const initialState: ProductState = {
+export const initialState: SelectionState = {
   color: "khaki",
   image_number: 0,
   size: "",
   quantity: 1,
+  available: false,
   submitted: false,
   loading: false,
   success: false,

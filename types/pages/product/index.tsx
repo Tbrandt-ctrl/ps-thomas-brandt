@@ -40,10 +40,11 @@ interface ProductData {
   types: Type[];
 }
 
-interface ProductState {
+interface SelectionState {
   color: string;
   image_number: number;
   size: string;
+  available: boolean;
   quantity: number;
   submitted: boolean;
   loading: boolean;
@@ -51,9 +52,16 @@ interface ProductState {
   error: String;
 }
 
-interface ProductReducerPayload {
+interface SelectionReducerPayload {
   type: string;
   payload?: any;
 }
 
-export type { ProductData, ProductState, Type, ProductReducerPayload, Image };
+export type {
+  ProductData,
+  SelectionState,
+  Type,
+  SelectionReducerPayload,
+  Image,
+  Stock,
+};

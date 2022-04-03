@@ -1,34 +1,34 @@
 import ProductStyles from "@/styles/components/pages/product/Product.module.scss";
 import {
-  ProductState,
-  ProductReducerPayload,
+  SelectionState,
+  SelectionReducerPayload,
   Type,
 } from "@/types/pages/product";
 import { Dispatch } from "react";
 
 const ProductColorSelector = ({
-  product_state,
-  product_dispatch,
+  selection_state,
+  selection_dispatch,
   types,
 }: {
-  product_state: ProductState;
-  product_dispatch: Dispatch<ProductReducerPayload>;
+  selection_state: SelectionState;
+  selection_dispatch: Dispatch<SelectionReducerPayload>;
   types: Type[];
 }) => {
   return (
     <div>
       <h6>
-        Couleur: <span className="text-uppercase">{product_state.color}</span>
+        Couleur: <span className="text-uppercase">{selection_state.color}</span>
       </h6>
       <div className="d-flex flex-row justify-content-start align-items-center gap-2">
         {types.map((type, index) => {
-          const selected = product_state.color === type.color.name;
+          const selected = selection_state.color === type.color.name;
 
           return (
             <div
               key={index}
               onClick={() => {
-                product_dispatch({
+                selection_dispatch({
                   type: "update_color",
                   payload: type.color.name,
                 });

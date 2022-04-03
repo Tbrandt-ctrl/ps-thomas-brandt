@@ -8,28 +8,28 @@ import ProductImage from "@/components/pages/product/image/ProductImage";
 import ProductInfo from "@/components/pages/product/content/ProductInfo";
 import {
   initialState,
-  productReducer,
-} from "@/components/pages/product/productReducer";
+  selectionReducer,
+} from "@/components/pages/product/selectionReducer";
 
 const ProductContent = ({ product }: { product: ProductData }) => {
   const { types } = product;
 
-  const [product_state, product_dispatch] = useReducer(
-    productReducer,
+  const [selection_state, selection_dispatch] = useReducer(
+    selectionReducer,
     initialState
   );
 
-  const productProps = {
-    product_state,
-    product_dispatch,
+  const SelectionProps = {
+    selection_state,
+    selection_dispatch,
   };
 
   return (
     <section>
       <BootStrapRow>
-        {types && <ProductImage {...productProps} types={types} />}
+        {types && <ProductImage {...SelectionProps} types={types} />}
         {product && (
-          <ProductInfo productProps={productProps} product={product} />
+          <ProductInfo SelectionProps={SelectionProps} product={product} />
         )}
       </BootStrapRow>
     </section>

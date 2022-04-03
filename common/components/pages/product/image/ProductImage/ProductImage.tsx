@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 import type {
-  ProductReducerPayload,
-  ProductState,
+  SelectionReducerPayload,
+  SelectionState,
   Type,
 } from "@/types/pages/product";
 import { Dispatch } from "react";
@@ -13,21 +13,21 @@ import ProductImageCarousel from "@/components/pages/product/image/ProductImageC
 import ProductImageSelector from "@/components/pages/product/image/ProductImageSelector";
 
 const ProductImage = ({
-  product_state,
-  product_dispatch,
+  selection_state,
+  selection_dispatch,
   types,
 }: {
-  product_state: ProductState;
-  product_dispatch: Dispatch<ProductReducerPayload>;
+  selection_state: SelectionState;
+  selection_dispatch: Dispatch<SelectionReducerPayload>;
   types: Type[];
 }) => {
   const images = types?.find(
-    (type: Type) => type.color.name === product_state.color
+    (type: Type) => type.color.name === selection_state.color
   )?.images;
 
   useEffect(() => {
-    product_dispatch({ type: "set_image", payload: 0 });
-  }, [product_state.color]);
+    selection_dispatch({ type: "set_image", payload: 0 });
+  }, [selection_state.color]);
 
   return (
     <div className="col-7">
@@ -37,13 +37,13 @@ const ProductImage = ({
             <div className="col-3">
               <ProductImageSelector
                 images={images}
-                product_dispatch={product_dispatch}
+                selection_dispatch={selection_dispatch}
               />
             </div>
             <div className="col-9 h-50">
               <ProductImageCarousel
                 images={images}
-                product_state={product_state}
+                selection_state={selection_state}
               />
             </div>
           </>

@@ -1,11 +1,11 @@
-import { ProductState, Image } from "@/types/pages/product";
+import { SelectionState, Image } from "@/types/pages/product";
 
 const ProductImageCarousel = ({
   images,
-  product_state,
+  selection_state,
 }: {
   images: Image[];
-  product_state: ProductState;
+  selection_state: SelectionState;
 }) => {
   return (
     <div
@@ -19,7 +19,7 @@ const ProductImageCarousel = ({
             <div
               key={index}
               className={`carousel-item ${
-                index === product_state.image_number ? "active" : null
+                index === selection_state.image_number ? "active" : null
               }`}
             >
               <img

@@ -2,24 +2,24 @@ import { useState, useEffect, Dispatch } from "react";
 
 import ProductStyles from "@/styles/components/pages/product/Product.module.scss";
 import {
-  ProductReducerPayload,
-  ProductState,
+  SelectionReducerPayload,
+  SelectionState,
   Type,
 } from "@/types/pages/product";
 
 const ProductSizeSelector = ({
-  product_state,
-  product_dispatch,
+  selection_state,
+  selection_dispatch,
   current_type,
 }: {
-  product_state: ProductState;
-  product_dispatch: Dispatch<ProductReducerPayload>;
+  selection_state: SelectionState;
+  selection_dispatch: Dispatch<SelectionReducerPayload>;
   current_type: Type;
 }) => {
   return (
     <div>
       <h6>
-        Taile: <span className="text-uppercase">{product_state.size}</span>
+        Taile: <span className="text-uppercase">{selection_state.size}</span>
       </h6>
       <div className="d-flex flex-row justify-content-start align-items-center gap-2">
         {current_type.stock.map(({ quantity, size }, index) => {
@@ -28,8 +28,8 @@ const ProductSizeSelector = ({
               key={index}
               quantity={quantity}
               size={size}
-              product_state={product_state}
-              product_dispatch={product_dispatch}
+              selection_state={selection_state}
+              selection_dispatch={selection_dispatch}
             />
           );
         })}
@@ -43,32 +43,26 @@ export default ProductSizeSelector;
 const SizeSelectorBox = ({
   quantity,
   size,
-  product_state,
-  product_dispatch,
+  selection_state,
+  selection_dispatch,
 }: {
   quantity: number;
   size: string;
-  product_state: ProductState;
-  product_dispatch: Dispatch<ProductReducerPayload>;
+  selection_state: SelectionState;
+  selection_dispatch: Dispatch<SelectionReducerPayload>;
 }) => {
   const [selected, setSelected] = useState(false);
   const [available, setAvailable] = useState(false);
 
   useEffect(() => {
-    setSelected(size === product_state.size);
+    setSelected(size === selection_state.size);
     setAvailable(quantity >= 1 ? true : false);
-  }, [product_state]);
-
-  useEffect(() => {
-    if (selected && !available) {
-      product_dispatch({ type: "update_size", payload: null });
-    }
-  }, [selected, available]);
+  }, [selection_state]);
 
   return (
     <div
       onClick={() => {
-        available && product_dispatch({ type: "update_size", payload: size });
+        selection_dispatch({ type: "update_size", payload: size });
       }}
       className={`${ProductStyles.box} ${ProductStyles.size_box} ${
         selected && ProductStyles.selected
