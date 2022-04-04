@@ -1,7 +1,9 @@
 import { useState, useEffect, Dispatch } from "react";
 
 import ProductStyles from "@/styles/components/pages/product/Product.module.scss";
-import { ReducerPayload, SelectionState, Type } from "@/types/pages/product";
+
+import { SelectionState, Type } from "@/types/pages/product";
+import { ReducerPayload } from "@/types/reducer";
 
 const ProductSizeSelector = ({
   selection_state,

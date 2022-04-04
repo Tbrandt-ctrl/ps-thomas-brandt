@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 
-import type {
-  ReducerPayload,
-  SelectionState,
-  Type,
-} from "@/types/pages/product";
+import type { SelectionState, Type } from "@/types/pages/product";
+import { ReducerPayload } from "@/types/reducer";
 import { Dispatch } from "react";
 
 import BootStrapRow from "@/utils/BootStrapRow";

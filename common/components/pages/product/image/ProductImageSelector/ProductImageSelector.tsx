@@ -1,7 +1,8 @@
-import { ReducerPayload, Image } from "@/types/pages/product";
-import { Dispatch } from "react";
-
 import styles from "./ProductImageSelector.module.scss";
+
+import { Image } from "@/types/pages/product";
+import { Dispatch } from "react";
+import { ReducerPayload } from "@/types/reducer";
 
 const ProductImageSelector = ({
   images,

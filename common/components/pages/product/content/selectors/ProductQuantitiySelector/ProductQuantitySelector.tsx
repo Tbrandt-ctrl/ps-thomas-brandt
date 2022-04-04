@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-import { SelectionState, Type, Stock } from "@/types/pages/product";
+import ProductStyles from "@/styles/components/pages/product/Product.module.scss";
+
+import { SelectionState, Type } from "@/types/pages/product";
 import { ReducerPayload } from "@/types/reducer";
 import { Dispatch } from "react";
-
-import ProductStyles from "@/styles/components/pages/product/Product.module.scss";
 
 const ProductQuantitySelector = ({
   selection_state,
@@ -21,7 +21,7 @@ const ProductQuantitySelector = ({
   //The available quantity and size for the current stock selected
   const [inventory, setInventory] = useState({ size: "", quantity: 0 });
 
-  //get the current inventory selected (with the size and the quantity)
+  //Get the current inventory selected (with the size and the quantity)
   useEffect(() => {
     current_type &&
       setInventory(
@@ -31,7 +31,7 @@ const ProductQuantitySelector = ({
       );
   }, [selection_state]);
 
-  //update the availability of the selection based on the size and the quantity of the current inventory
+  //Update the availability of the selection based on the size and the quantity of the current inventory
   useEffect(() => {
     selection_dispatch({
       type: "update_available",

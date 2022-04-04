@@ -1,7 +1,6 @@
 import ProductSelector from "@/components/pages/product/content/selectors/ProductSelector";
 
 import { ProductData, SelectionState } from "@/types/pages/product";
-
 import { ReducerPayload } from "@/types/reducer";
 import { Dispatch } from "react";
 
@@ -18,6 +17,7 @@ const ProductInfo = ({
   SelectionProps: SelectionProps;
 }) => {
   const { types } = product;
+
   return (
     <div className="p-4 col-5 d-flex flex-column justify-content-start align-items-center">
       <h1>Logo</h1>

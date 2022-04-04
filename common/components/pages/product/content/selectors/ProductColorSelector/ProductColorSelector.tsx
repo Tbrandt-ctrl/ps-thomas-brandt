@@ -1,5 +1,7 @@
 import ProductStyles from "@/styles/components/pages/product/Product.module.scss";
-import { SelectionState, ReducerPayload, Type } from "@/types/pages/product";
+
+import { SelectionState, Type } from "@/types/pages/product";
+import { ReducerPayload } from "@/types/reducer";
 import { Dispatch } from "react";
 
 const ProductColorSelector = ({

@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer, useContext } from "react";
+import { useState, useEffect } from "react";
 
 import { SelectionState } from "@/types/pages/product";
 import { ReducerPayload } from "@/types/reducer";
@@ -27,8 +27,7 @@ const ProductSelector = ({
   const [isFormValid, setIsFormValid] = useState(false);
 
   const { selection_state, selection_dispatch } = SelectionProps;
-  const { title, price, color, size, quantity, success, available } =
-    selection_state;
+  const { title, price, color, size, quantity, success } = selection_state;
 
   const current_type = types.find((type: Type) => type.color.name === color);
 
@@ -54,14 +53,6 @@ const ProductSelector = ({
     e.preventDefault();
     selection_dispatch({ type: "submit" });
 
-    const product_title = "Manteau d'hiver isolé - Homme"; //à mettre dans le state et l'intialiser au chargement de la page
-
-    const success_message = `Vous avez commandé ${
-      selection_state.quantity === 1 ? "un" : selection_state.quantity
-    } ${product_title} ${selection_state.color} en taille ${
-      selection_state.size
-    }`;
-
     if (isFormValid) {
       try {
         selection_dispatch({ type: "success" });
@@ -77,7 +68,10 @@ const ProductSelector = ({
           },
         });
       } catch (error) {
-        selection_dispatch({ type: "error", payload: error });
+        selection_dispatch({
+          type: "error",
+          payload: error,
+        });
       }
     } else {
       selection_dispatch({
@@ -112,7 +106,7 @@ const ProductSelector = ({
           <ProductQuantitySelector
             {...SelectionProps}
             current_type={current_type}
-          />{" "}
+          />
         </>
       ) : (
         <span>please select a color</span>
