@@ -8,6 +8,7 @@ export const basketReducer = (
   switch (type) {
     case "add_item":
       const new_items = [...state.items, payload.item];
+
       return {
         ...state,
         items: new_items,

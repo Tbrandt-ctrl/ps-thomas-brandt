@@ -9,7 +9,7 @@ export const selectionReducer = (
 
   switch (type) {
     case "init": {
-      return { ...state, title: payload.title, price: payload.price };
+      return { ...state, title: payload.title, price: payload.price.current };
     }
 
     case "next_image": {
@@ -79,6 +79,10 @@ export const selectionReducer = (
 
     case "error": {
       return { ...state, error: payload, loading: false, submitted: false };
+    }
+
+    case "reset_error": {
+      return { ...state, error: "" };
     }
 
     case "success": {

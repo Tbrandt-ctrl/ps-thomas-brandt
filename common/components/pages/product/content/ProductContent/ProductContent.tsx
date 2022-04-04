@@ -29,7 +29,7 @@ const ProductContent = ({ product }: { product: ProductData }) => {
       type: "init",
       payload: { title: product.title, price: product.price },
     });
-  }, [product]);
+  }, [selection_state.color, selection_state.size, selection_state.quantity]);
 
   return (
     <section>

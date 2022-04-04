@@ -1,10 +1,12 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useReducer, useContext } from "react";
 
 import { SelectionState } from "@/types/pages/product";
 import { ReducerPayload } from "@/types/reducer";
 import { Dispatch } from "react";
 import { Type } from "@/types/pages/product";
 import { SyntheticEvent } from "react";
+
+import { useBasketContext } from "context/basketContext";
 
 import ProductColorSelector from "@/components/pages/product/content/selectors/ProductColorSelector";
 import ProductSizeSelector from "@/components/pages/product/content/selectors/ProductSizeSelector";
@@ -25,13 +27,28 @@ const ProductSelector = ({
   const [isFormValid, setIsFormValid] = useState(false);
 
   const { selection_state, selection_dispatch } = SelectionProps;
-  const { color, size, quantity, success, available } = selection_state;
+  const { title, price, color, size, quantity, success, available } =
+    selection_state;
 
   const current_type = types.find((type: Type) => type.color.name === color);
 
+  const { basket_state, basket_dispatch } = useBasketContext();
+
   useEffect(() => {
-    setIsFormValid(color && size && quantity >= 1 ? true : false);
-  }, [color, size, quantity]);
+    setIsFormValid(color !== "" && size !== "" && quantity >= 1 ? true : false);
+
+    if (size !== "" && quantity === 0) {
+      selection_dispatch({
+        type: "error",
+        payload: "Ce produit n'est plus disponible",
+      });
+    } else {
+      selection_dispatch({
+        type: "reset_error",
+        payload: null,
+      });
+    }
+  }, [color, size, quantity, success]);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -47,8 +64,18 @@ const ProductSelector = ({
 
     if (isFormValid) {
       try {
-        console.log(success_message);
         selection_dispatch({ type: "success" });
+        basket_dispatch({
+          type: "add_item",
+          payload: {
+            item: {
+              title,
+              price,
+              quantity,
+              size,
+            },
+          },
+        });
       } catch (error) {
         selection_dispatch({ type: "error", payload: error });
       }
@@ -59,6 +86,16 @@ const ProductSelector = ({
       });
     }
   };
+
+  useEffect(() => {
+    const last_item = basket_state.items[basket_state.items.length - 1];
+    const message =
+      basket_state.items.length >= 1
+        ? `A new item has been added to your basket: title: ${last_item.title}, size: ${last_item.size}, quantity: ${last_item.quantity}, price: ${last_item.price}`
+        : null;
+
+    message && console.log(message);
+  }, [basket_state]);
 
   return (
     <form
